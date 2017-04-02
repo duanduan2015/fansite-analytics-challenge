@@ -1,17 +1,15 @@
 import java.util.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 public class Test {
-    public static void main(String[] args) {
-        String path = "www.google.com";
-        String[] s = path.split("\\.");
-        ArrayList<String> list = new ArrayList<String>();
-        for (String ss : s) {
-            if (ss.length() == 0) {
-                continue;
-            }
-            list.add(ss);
-            System.out.println(ss);
+    public static void main(String[] args){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss");
+        String dateString = "01/Jul/1995:00:00:01";
+        try {
+            Date date = sdf.parse(dateString);
+            System.out.println(date);
+        } catch (Exception e) {
+
         }
-        System.out.println(s.length);
-        System.out.println(list.size());
     }
 }

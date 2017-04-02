@@ -26,8 +26,6 @@ public class LogParser {
                     info[i] = m.group(i + 1);
                 }
                 return new LogEntry(info);
-                //System.out.printf("%s,%s,%s,%s,%s,%s,%s\n", m.group(1), 
-                        //m.group(2), m.group(3), m.group(4), m.group(5), m.group(6), m.group(7));
             } else {
                 throw new IllegalArgumentException("Unable to parse line '" + line + "'");
             }
