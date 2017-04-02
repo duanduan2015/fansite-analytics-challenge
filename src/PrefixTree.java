@@ -47,6 +47,27 @@ public class PrefixTree <K extends Segmentisable, V> {
        return currentRoot.getValue();
     }
 
+    public void printTree() {
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(this.root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            StringBuilder layerString = new StringBuilder();
+            for (int i = 0; i < size; i++) {
+                TreeNode currentRoot = queue.poll();
+                for (String key : currentRoot.children.keySet()) {
+                    TreeNode node = currentRoot.children.get(key);
+                    layerString.append(key);
+                    layerString.append("->");
+                    layerString.append(node.value);
+                    layerString.append(";");
+                    queue.offer(node);
+                }
+            }
+            System.out.println(layerString.toString());
+        }
+    }
+
     class TreeNode {
 
         private HashMap<String, TreeNode> children;
@@ -81,6 +102,10 @@ public class PrefixTree <K extends Segmentisable, V> {
                 return childName;
             }
             return null;
+        }
+
+        public HashMap<String, TreeNode> getChildren() {
+            return this.children;
         }
 
     }
