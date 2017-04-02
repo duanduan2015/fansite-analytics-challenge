@@ -1,10 +1,16 @@
+import java.util.*;
 public class ResourcePath implements Segmentisable {
     private List<String> segments;
+    private String pathString;
     public ResourcePath(String s) {
         //resource path, for example: /login 
+        this.pathString = s;
         String[] layers = s.split("/");
-        this.segments = new ArrayList<String>(layers.length);
+        this.segments = new ArrayList<String>();
         for (int i = 0; i < layers.length; i++) {
+           if (layers[i].length() == 0) {
+               continue;
+           }
            segments.add(layers[i]); 
         }
     }
@@ -15,5 +21,9 @@ public class ResourcePath implements Segmentisable {
 
     public int segmentsSize() {
         return this.segments.size();
+    }
+    
+    public String toString() {
+        return pathString;
     }
 }

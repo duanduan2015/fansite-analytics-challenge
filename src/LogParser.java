@@ -8,22 +8,31 @@ public class LogParser {
     private static Pattern REGEX_PATTERN;
 
     public LogParser(String path) throws IOException {
-        bufferedReader = new BufferedReader(new FileReader(new File(path)));
+        this.bufferedReader = new BufferedReader(new FileReader(new File(path)));
     }
 
-    public void parse() throws IOException {
-        String line = null;
-        while ((line = bufferedReader.readLine()) != null) {
-            System.out.println(line);
+    public void close() throws IOException {
+        this.bufferedReader.close();
+    }
+
+    public LogEntry nextEntry() throws IOException {
+        String line = this.bufferedReader.readLine();
+        if (line != null) {
             Matcher m = REGEX_PATTERN.matcher(line);
             if (m.find()) {
-                System.out.printf("%s,%s,%s,%s,%s,%s,%s\n", m.group(1), 
-                        m.group(2), m.group(3), m.group(4), m.group(5), m.group(6), m.group(7));
+                int count = m.groupCount();
+                String[] info = new String[count];
+                for (int i = 0; i < count; i++) {
+                    info[i] = m.group(i + 1);
+                }
+                return new LogEntry(info);
+                //System.out.printf("%s,%s,%s,%s,%s,%s,%s\n", m.group(1), 
+                        //m.group(2), m.group(3), m.group(4), m.group(5), m.group(6), m.group(7));
             } else {
                 throw new IllegalArgumentException("Unable to parse line '" + line + "'");
             }
         }
-        bufferedReader.close();
+        return null;
     }
 
     private static void buildRegexPattern() {
