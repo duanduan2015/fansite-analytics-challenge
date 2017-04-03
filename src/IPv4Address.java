@@ -10,14 +10,9 @@ public class IPv4Address implements Comparable<IPv4Address> {
             this.integerAddress += ip * (int)(Math.pow(256, power));
         }
     }
-
-    public Integer getAddress() {
-        return this.integerAddress;
-    }
     
     public int compareTo(IPv4Address ip) {
         return this.integerAddress - ip.getAddress();
     }
-
 }
 
