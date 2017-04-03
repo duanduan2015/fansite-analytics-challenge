@@ -31,10 +31,28 @@ public class LogEntry {
         }
 
         this.reply = new HttpReply(info[5], info[6]);
-        System.out.print(this.address.toString() + ",");
+
+        /*System.out.print(this.address.toString() + ",");
         System.out.print(this.date + ",");
         System.out.print(this.request.toString() + ",");
         System.out.print(this.reply.toString());
-        System.out.print("\n");
+        System.out.print("\n");*/
     }
+
+    public ClientAddress getAddress() {
+        return this.address;
+    }
+
+    public Date getAccessDate() {
+        return this.date;
+    }
+
+    public HttpRequest getHttpRequest() {
+        return this.request;
+    }
+
+    public HttpReply getHttpReply() {
+        return this.reply;
+    }
+
 }
