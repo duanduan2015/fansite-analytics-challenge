@@ -12,7 +12,11 @@ public class IPv4Address implements Comparable<IPv4Address> {
     }
     
     public int compareTo(IPv4Address ip) {
-        return this.integerAddress - ip.getAddress();
+        return this.integerAddress - ip.getIPValue();
+    }
+
+    public Integer getIPValue() {
+        return this.integerAddress;
     }
 }
 

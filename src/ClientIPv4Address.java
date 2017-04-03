@@ -10,7 +10,7 @@ public class ClientIPv4Address extends IPv4Address implements ClientAddress {
     }
 
     public Integer getAddress() {
-        return this.integerAddress;
+        return this.getIPValue();
     }
 
     public String toString() {
