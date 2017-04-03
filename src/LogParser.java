@@ -34,7 +34,16 @@ public class LogParser {
     }
 
     private static void buildRegexPattern() {
-        String reClientAddr = "(\\S+)";
+        String reClientAddress = "(\\S+)";
+        String reDoubleDash = "-\\s+-";
+        String reTimestamp = "\\[(.+)\\]";
+        String reHTTPRequest = "\"\\s*(\\S+)\\s+([\\S&&[^\\?]]+)(?:\\?\\S*)?(?:\\s.*)?\"";
+        String reHTTPResponse = "(\\d+)\\s([\\d-]+)";
+        String reAssembled = "^\\s*" + reClientAddress +
+            "\\s*" + reDoubleDash + "\\s*" + reTimestamp +
+            "\\s*" + reHTTPRequest + "\\s*" + reHTTPResponse + "\\s*$";
+
+        /*String reClientAddr = "(\\S+)";
         String reDoubleDashed = "-\\s+-";
         String reTimeStamp = "\\[(.+)\\]";
         String reHTTPRequest = "[\"“](\\S+)\\s(\\S+)(?:\\s+(\\S+))?[\"”]";
@@ -44,8 +53,9 @@ public class LogParser {
             "\\s*" + reTimeStamp + 
             "\\s*" + reHTTPRequest + 
             "\\s*" + reHTTPResponse +
-            "\\s*$";
-        REGEX_PATTERN = Pattern.compile(assembled);
+            "\\s*$";*/
+
+        REGEX_PATTERN = Pattern.compile(reAssembled);
     }
 
     static {

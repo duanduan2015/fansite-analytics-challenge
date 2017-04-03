@@ -24,13 +24,9 @@ public class LogEntry {
 
         }
 
-        if (info[2].equals("GET")) {
-            this.request = new HttpGETRequest(info[2], info[3], info[4]);
-        } else {
-            this.request = new HttpPOSTRequest(info[2], info[3], info[4]);
-        }
+        this.request = new HttpRequest(info[2], info[3]);
 
-        this.reply = new HttpReply(info[5], info[6]);
+        this.reply = new HttpReply(info[4], info[5]);
 
         /*System.out.print(this.address.toString() + ",");
         System.out.print(this.date + ",");

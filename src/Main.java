@@ -10,6 +10,7 @@ public class Main {
         Set<HostActiveness> set = new HashSet<HostActiveness>();
         while (entry != null) {
             ClientAddress address = entry.getAddress();
+            //System.out.println(address.toString());
             int time = 0;
             if (clientAccessTimesMap.contains(address)) {
                 int accessTimes = clientAccessTimesMap.get(address);
