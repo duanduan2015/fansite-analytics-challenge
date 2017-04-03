@@ -8,11 +8,12 @@ public class Main {
         ClientAddressMap clientAccessTimesMap = new ClientAddressMap();
         PriorityQueue<HostActiveness> activeQueue = new PriorityQueue<HostActiveness>();
         Set<HostActiveness> set = new HashSet<HostActiveness>();
+        int i = 1;
         while (entry != null) {
             ClientAddress address = entry.getAddress();
             //System.out.println(address.toString());
             int time = 0;
-            if (clientAccessTimesMap.contains(address)) {
+            if (clientAccessTimesMap.contains(address) && clientAccessTimesMap.get(address) != null) {
                 int accessTimes = clientAccessTimesMap.get(address);
                 clientAccessTimesMap.put(address, accessTimes + 1);
                 time = accessTimes + 1;
@@ -33,6 +34,7 @@ public class Main {
                 activeQueue.poll();
             }
             entry = parser.nextEntry();
+            i++;
         }
         parser.close();
         while (activeQueue.size() > 0) {
