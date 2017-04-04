@@ -6,6 +6,7 @@ public class LogEntry {
 
     private ClientAddress address;
     private Date date; 
+    private String dateString;
     private HttpRequest request;
     private HttpReply reply;
 
@@ -19,6 +20,7 @@ public class LogEntry {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss");
         try {
             this.date = sdf.parse(info[1]);
+            this.dateString = info[1];
         } catch (Exception e) {
 
         }
@@ -40,6 +42,10 @@ public class LogEntry {
 
     public HttpReply getHttpReply() {
         return this.reply;
+    }
+
+    public String getDateString() {
+        return this.dateString;
     }
 
 }
