@@ -1,6 +1,7 @@
 import java.util.regex.*;
 
 public class HttpRequest {
+
     private String method;
     private ResourcePath path;
     private String requestString;
@@ -11,16 +12,12 @@ public class HttpRequest {
         if (matcher.find()) {
             return new HttpRequest(matcher.group(1), matcher.group(2));
         } else {
-            return new HttpRequest(null, null);
+            return null;
         }
     }
 
     public HttpRequest(String m, String p) {
-        if (m == null && p == null) {
-            this.path = null;
-        } else {
-            this.path = new ResourcePath(p);
-        }
+        this.path = new ResourcePath(p);
         this.method = m;
         this.requestString = m + " " + p;
     }

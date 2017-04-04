@@ -2,7 +2,7 @@ import java.util.*;
 
 public class HttpReply {
     private int status;
-    private int numOfBytes;
+    private long numOfBytes;
     private String replyString;
 
     public HttpReply(String s, String n) {
@@ -10,7 +10,7 @@ public class HttpReply {
         if (n.equals("-")) {
             this.numOfBytes = 0;
         } else {
-            this.numOfBytes = Integer.parseInt(n);
+            this.numOfBytes = Long.parseLong(n);
         }
         this.replyString = "Status code: " + s + "," + " number of bytes: " + n;
     }
@@ -19,7 +19,7 @@ public class HttpReply {
         return this.status;
     }
 
-    public int getNumOfBytes() {
+    public long getNumOfBytes() {
         return this.numOfBytes;
     }
 
