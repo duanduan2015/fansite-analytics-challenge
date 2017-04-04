@@ -9,8 +9,11 @@ public class LogEntry {
     private String dateString;
     private HttpRequest request;
     private HttpReply reply;
+    private String entryString;
 
-    public LogEntry(String[] info) {
+    public LogEntry(String[] info, String entryString) {
+
+        this.entryString = entryString;
 
         if (info[0].matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
             this.address = new ClientIPv4Address(info[0]);
@@ -46,6 +49,10 @@ public class LogEntry {
 
     public String getDateString() {
         return this.dateString;
+    }
+    
+    public String getEntryString() {
+        return this.entryString;
     }
 
 }

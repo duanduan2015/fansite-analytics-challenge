@@ -29,7 +29,7 @@ public class LogParser {
                 //info[0] = line.split(" ")[0];    
                 throw new IllegalArgumentException("Unable to parse line '" + line + "'");
             }
-            return new LogEntry(info);
+            return new LogEntry(info, line);
         }
         return null;
     }
@@ -38,7 +38,7 @@ public class LogParser {
         String reClientAddress = "(\\S+)";
         String reDoubleDash = "-\\s+-";
         String reTimestamp = "\\[(.+)\\]";
-        String reHTTPRequest = "\"(.*)\"";
+        String reHTTPRequest = "[\"“](.*)[\"”]";
         String reHTTPResponse = "(\\d+)\\s+([\\d-]+)";
         String reAssembled = "^\\s*" + reClientAddress +
             "\\s*" + reDoubleDash + "\\s*" + reTimestamp +

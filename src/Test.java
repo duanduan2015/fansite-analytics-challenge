@@ -3,7 +3,20 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 public class Test {
     public static void main(String[] args){
-        String path1 = "home/duanduan/Documents/ComputerScience/html";
+        List<String> list1 = new ArrayList<String>();
+        list1.add("h");
+        list1.add("e");
+        list1.add("l");
+        list1.add("l");
+        list1.add("o");
+        List<String> list2 = new ArrayList<String>();
+        list2.add("h");
+        list2.add("e");
+        list2.add("l");
+        list2.add("l");
+        list2.add("u");
+        System.out.println(list1.equals(list2));
+        /*String path1 = "home/duanduan/Documents/ComputerScience/html";
         ResourcePath r1 = new ResourcePath(path1);
         String path2 = "home/duanduan/Documents/ComputerScience/xml";
         ResourcePath r2 = new ResourcePath(path2);
@@ -22,7 +35,7 @@ public class Test {
         rm.put(r4, 4);
         rm.put(r5, 5);
         rm.put(r6, 6);
-        rm.getResourceTree().printTree();
+        rm.getResourceTree().printTree();*/
         /*ClientAddressMap pt = new ClientAddressMap();
         ClientAddress r11 = new ClientIPv4Address("192.163.1.1");
         ClientAddress r22 = new ClientIPv4Address("192.163.1.2");

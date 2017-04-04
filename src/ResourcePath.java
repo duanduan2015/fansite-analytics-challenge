@@ -37,4 +37,16 @@ public class ResourcePath implements Segmentisable {
         path.append(this.segments.get(this.segments.size() - 1));
         return path.toString();
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ResourcePath)) {
+            return false;
+        }
+        ResourcePath path = (ResourcePath) o;
+        return this.segments.equals(path.getSegments());
+    }
 }
