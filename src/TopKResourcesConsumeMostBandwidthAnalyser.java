@@ -72,7 +72,13 @@ class ResourceBandwidth implements Comparable<ResourceBandwidth> {
 
     @Override
     public int compareTo(ResourceBandwidth h) {
-        return (int) (this.totalBandwidth - h.getTotalBandwidth());
+        if (this.totalBandwidth > h.getTotalBandwidth()) {
+            return 1;
+        }  
+        if (this.totalBandwidth == h.getTotalBandwidth()) {
+            return 0;
+        }  
+        return -1;
     }
 
     @Override

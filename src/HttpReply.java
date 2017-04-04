@@ -3,7 +3,6 @@ import java.util.*;
 public class HttpReply {
     private int status;
     private long numOfBytes;
-    private String replyString;
 
     public HttpReply(String s, String n) {
         this.status = Integer.parseInt(s);
@@ -12,7 +11,6 @@ public class HttpReply {
         } else {
             this.numOfBytes = Long.parseLong(n);
         }
-        this.replyString = "Status code: " + s + "," + " number of bytes: " + n;
     }
     
     public int getStatusCode() {
@@ -24,6 +22,6 @@ public class HttpReply {
     }
 
     public String toString() {
-        return this.replyString;
+        return "Status code: " + Integer.toString(this.status)  + "," + " number of bytes: " + Long.toString(numOfBytes);
     }
 }
