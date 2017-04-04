@@ -8,7 +8,9 @@ public class Main {
         int i = 1;
         LogEntry entry = parser.nextEntry();
         while (entry != null) {
-            System.out.println(i);
+            if (i % 10000 == 0) {
+                System.out.println(i);
+            }
             hostsAnalyser.analyze(entry);
             resourcesAnalyser.analyze(entry);
             entry = parser.nextEntry();
