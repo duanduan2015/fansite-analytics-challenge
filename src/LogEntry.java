@@ -16,23 +16,14 @@ public class LogEntry {
         } else {
             this.address = new ClientDomainNameAddress(info[0]);
         }
-
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss");
         try {
             this.date = sdf.parse(info[1]);
         } catch (Exception e) {
 
         }
-
-        this.request = new HttpRequest(info[2], info[3]);
-
-        this.reply = new HttpReply(info[4], info[5]);
-
-        /*System.out.print(this.address.toString() + ",");
-        System.out.print(this.date + ",");
-        System.out.print(this.request.toString() + ",");
-        System.out.print(this.reply.toString());
-        System.out.print("\n");*/
+        this.request = HttpRequest.parseHttpRequest(info[2]);
+        this.reply = new HttpReply(info[3], info[4]);
     }
 
     public ClientAddress getAddress() {
