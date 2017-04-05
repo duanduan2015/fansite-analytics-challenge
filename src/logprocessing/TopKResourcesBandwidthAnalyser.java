@@ -1,3 +1,5 @@
+package logprocessing;
+import tools.*;
 import java.util.*;
 import java.io.*;
 
@@ -9,9 +11,9 @@ public class TopKResourcesBandwidthAnalyser implements Analyser {
     private PriorityQueue<ResourceBandwidth> queue;
     private Set<ResourceBandwidth> set;
 
-    public TopKResourcesBandwidthAnalyser(int k, String outputPath) throws IOException {
+    public TopKResourcesBandwidthAnalyser(int k, File file) throws IOException {
         this.topK = k;
-        this.writer = new FileWriter(outputPath); 
+        this.writer = new FileWriter(file); 
         this.resourcesMap = new ResourcePathMap();
         this.queue = new PriorityQueue<ResourceBandwidth>();
         this.set = new HashSet<ResourceBandwidth>();
@@ -47,7 +49,7 @@ public class TopKResourcesBandwidthAnalyser implements Analyser {
 
         ArrayList<String> results = new ArrayList<String>();
 
-        for (int i = 0; i < topK; i++) {
+        while (!this.queue.isEmpty()) {
             ResourceBandwidth rb = this.queue.poll();
             results.add(rb.getResourceName() + "\n");
         }

@@ -1,3 +1,5 @@
+package logprocessing;
+import tools.*;
 import java.util.*;
 import java.io.*;
 public class TopKActiveHostsAnalyser implements Analyser {
@@ -8,9 +10,9 @@ public class TopKActiveHostsAnalyser implements Analyser {
     private PriorityQueue<HostActiveness> activeQueue;
     private Set<HostActiveness> set;
 
-    public TopKActiveHostsAnalyser(int k, String outputPath) throws IOException {
+    public TopKActiveHostsAnalyser(int k, File file) throws IOException {
         this.topK = k;
-        this.writer = new FileWriter(outputPath); 
+        this.writer = new FileWriter(file); 
         this.hostsMap = new ClientAddressMap();
         this.activeQueue = new PriorityQueue<HostActiveness>();
         this.set = new HashSet<HostActiveness>();
@@ -43,7 +45,7 @@ public class TopKActiveHostsAnalyser implements Analyser {
 
         ArrayList<String> results = new ArrayList<String>();
 
-        for (int i = 0; i < topK; i++) {
+        while (!this.activeQueue.isEmpty()) {
             HostActiveness ha = this.activeQueue.poll();
             results.add(ha.getHostName() + "," + Integer.toString(ha.getAccessTimes()) + "\n");
         }

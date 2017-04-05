@@ -1,3 +1,4 @@
+package tools;
 import java.util.*;
 public class DomainName implements Segmentisable {
     private List<String> segments;

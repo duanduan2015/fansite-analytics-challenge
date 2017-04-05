@@ -1,3 +1,5 @@
+package logprocessing;
+import tools.*;
 import java.util.*;
 import java.io.*;
 
@@ -10,9 +12,9 @@ public class TopKBusiestNMinutesAnalyser {
     private int minutes;
     private TimePeroid currentTimePeroid;
 
-    public TopKBusiestNMinutesAnalyser(int k, int minutes, String outputPath) throws IOException {
+    public TopKBusiestNMinutesAnalyser(int k, int minutes, File file) throws IOException {
         this.topK = k;
-        this.writer = new FileWriter(outputPath); 
+        this.writer = new FileWriter(file); 
         this.queue = new PriorityQueue<TimePeroid>();
         this.list = new LinkedList<LogEntry>();
         this.minutes = minutes;
@@ -47,14 +49,45 @@ public class TopKBusiestNMinutesAnalyser {
         }
     }
 
+    private void complementTopK() {
+
+        if (this.list.size() == 0) {
+            return;
+        }
+
+        LogEntry entry = this.list.poll();
+        TimePeroid current = new TimePeroid(entry.getDateString(), 1, entry.getAccessDate());
+        current.addNAccess(this.list.size());
+
+        while (!this.list.isEmpty()) {
+            LogEntry next = this.list.poll();
+            if (next.getAccessDate().equals(current.getStartTime())) {
+                continue;
+            }
+            this.queue.offer(current);
+            current = new TimePeroid(next.getDateString(), 1, next.getAccessDate());
+            current.addNAccess(this.list.size());
+        }
+
+        this.queue.offer(current);
+
+        while (this.queue.size() > this.topK) {
+            this.queue.poll();
+        }
+
+    }
+
     public void reportResults() throws IOException {
 
         ArrayList<String> results = new ArrayList<String>();
 
-        for (int i = 0; i < topK; i++) {
+        complementTopK();
+
+        while (!this.queue.isEmpty()) {
             TimePeroid tp = this.queue.poll();
             results.add(tp.getTimeString() + "," + Integer.toString(tp.getTotalAccessTimes()) + "\n");
         }
+        
 
         for (int i = results.size() - 1; i >= 0; i--) {
             this.writer.write(results.get(i));
@@ -77,6 +110,12 @@ class TimePeroid implements Comparable<TimePeroid> {
         this.endTime = new Date(this.startTime.getTime() + (long) minutes * 60 * 1000);
         this.totalAccessTimes = 1;
         
+    }
+    
+    public TimePeroid (String string, int accessTimes, Date date) {
+        this.timeString = string;
+        this.totalAccessTimes = accessTimes;
+        this.startTime = date;
     }
 
     public boolean inTimePeroid(Date d) {

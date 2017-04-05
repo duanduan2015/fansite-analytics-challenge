@@ -1,4 +1,6 @@
+package tools;
 import java.util.*;
+
 public class ResourcePath implements Segmentisable {
 
     private List<String> segments;
@@ -18,6 +20,10 @@ public class ResourcePath implements Segmentisable {
 		}
 		if (offset != charArray.length) {
 			this.segments.add(new String(charArray, offset, charArray.length - offset));
+		} else {
+			if (this.segments.size() > 0) {
+				this.segments.add("");
+			}
 		}
     }
 
@@ -29,7 +35,7 @@ public class ResourcePath implements Segmentisable {
         if (this.segments.size() == 0) {
             return "/";
         }
-        StringBuilder path = new StringBuilder();
+        StringBuilder path = new StringBuilder("/");
         for (int i = 0; i < this.segments.size() - 1; i++) {
             path.append(this.segments.get(i));
             path.append("/");

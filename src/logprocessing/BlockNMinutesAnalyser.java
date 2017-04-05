@@ -1,4 +1,6 @@
+package logprocessing;
 import java.util.*;
+import tools.*;
 import java.io.*;
 public class BlockNMinutesAnalyser implements Analyser {
        
@@ -6,16 +8,14 @@ public class BlockNMinutesAnalyser implements Analyser {
     private int blockMinutes;
     private int maxFailedTimes;
     private FileWriter writer;
-    //private ArrayList<String> blockList;
     private HashMap<String, Block> failedList;
 	private static final ResourcePath LOGIN = new ResourcePath("/login");
 
-    public BlockNMinutesAnalyser(String output, int detectPeroid, int blockPeroid, int max) throws IOException{
-        this.writer = new FileWriter(output); 
+    public BlockNMinutesAnalyser(int detectPeroid, int blockPeroid, int max, File file) throws IOException{
+        this.writer = new FileWriter(file); 
         this.detectSeconds = detectPeroid;
         this.blockMinutes = blockPeroid;
         this.maxFailedTimes = max;
-        //this.blockList = new ArrayList<String>();
         this.failedList = new HashMap<String, Block>();
     }
     

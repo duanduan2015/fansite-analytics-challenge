@@ -1,3 +1,5 @@
+package logprocessing;
+import tools.*;
 import java.io.*;
 import java.util.*;
 public class Main {
@@ -6,10 +8,10 @@ public class Main {
 
         LogParser parser = new LogParser(args[0]);
 
-        TopKActiveHostsAnalyser hostsAnalyser = new TopKActiveHostsAnalyser(10, "hosts.txt");
-        TopKResourcesBandwidthAnalyser resourcesAnalyser = new TopKResourcesBandwidthAnalyser(10, "resources.txt");
-        TopKBusiestNMinutesAnalyser busiestHoursAnalyser = new TopKBusiestNMinutesAnalyser(10, 60, "hours.txt");
-        BlockNMinutesAnalyser blockAnalyser = new BlockNMinutesAnalyser("blocked.txt", 20, 5, 3);
+        TopKActiveHostsAnalyser hostsAnalyser = new TopKActiveHostsAnalyser(10, new File(args[1]));
+        TopKResourcesBandwidthAnalyser resourcesAnalyser = new TopKResourcesBandwidthAnalyser(10, new File(args[2]));
+        TopKBusiestNMinutesAnalyser busiestHoursAnalyser = new TopKBusiestNMinutesAnalyser(10, 60, new File(args[3]));
+        BlockNMinutesAnalyser blockAnalyser = new BlockNMinutesAnalyser(20, 5, 3, new File(args[4]));
 
         LogEntry entry = parser.nextEntry();
 

@@ -1,5 +1,8 @@
+package tools;
 import java.util.*;
+
 public class IPv4Address implements Comparable<IPv4Address> {
+    
     private Integer integerAddress;
     public IPv4Address (String s) {
         String[] parts = s.split("\\.");
