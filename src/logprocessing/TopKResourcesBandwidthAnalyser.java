@@ -27,7 +27,7 @@ public class TopKResourcesBandwidthAnalyser implements Analyser {
         HttpReply httpReply = entry.getHttpReply();
         ResourcePath address = httpRequest.getResourcePath();
         long bytes = httpReply.getNumOfBytes();
-        if (this.resourcesMap.contains(address) && this.resourcesMap.get(address) != null) {
+        if (this.resourcesMap.contains(address)) {
             bytes += this.resourcesMap.get(address);
             this.resourcesMap.put(address, bytes);
         } else {

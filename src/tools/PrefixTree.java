@@ -20,7 +20,8 @@ public class PrefixTree <K extends Segmentisable, V> {
                return false;
            }
        }
-       return true;
+       //return true;
+       return this.get(key) != null;
     }
 
     public void put(K key, V value) {

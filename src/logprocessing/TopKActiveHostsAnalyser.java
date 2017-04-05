@@ -21,7 +21,7 @@ public class TopKActiveHostsAnalyser implements Analyser {
     public void analyze(LogEntry entry) {
         ClientAddress address = entry.getAddress();
         int time = 0;
-        if (this.hostsMap.contains(address) && this.hostsMap.get(address) != null) {
+        if (this.hostsMap.contains(address)) {
             int accessTimes = this.hostsMap.get(address);
             this.hostsMap.put(address, accessTimes + 1);
             time = accessTimes + 1;

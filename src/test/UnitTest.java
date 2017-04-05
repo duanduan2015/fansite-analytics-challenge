@@ -39,4 +39,40 @@ public class UnitTest {
         }
     }
 
+    @Test
+    public void testPrefixTree() {
+
+        PrefixTree<ResourcePath, Integer> tmap = new PrefixTree<ResourcePath, Integer>();
+
+        ResourcePath rp1 = new ResourcePath("/a/b/c");
+        ResourcePath rp2 = new ResourcePath("/a/b/d");
+        ResourcePath rp3 = new ResourcePath("/a/b");
+        ResourcePath rp4 = new ResourcePath("/");
+
+        tmap.put(rp1, 1);
+        tmap.put(rp2, 2);
+        tmap.put(rp3, 3);
+        tmap.put(rp4, 4);
+
+        Assert.assertEquals(1, tmap.get(rp1).intValue());
+        Assert.assertEquals(2, tmap.get(rp2).intValue());
+        Assert.assertEquals(3, tmap.get(rp3).intValue());
+        Assert.assertEquals(4, tmap.get(rp4).intValue());
+
+        tmap.put(rp4, 9);
+        Assert.assertEquals(9, tmap.get(rp4).intValue());
+
+        Assert.assertTrue(tmap.contains(new ResourcePath("a/b/c")));
+        Assert.assertTrue(tmap.contains(new ResourcePath("")));
+
+        Assert.assertFalse(tmap.contains(new ResourcePath("a")));
+        Assert.assertFalse(tmap.contains(new ResourcePath("/a")));
+        Assert.assertFalse(tmap.contains(new ResourcePath("/a/b/c/d")));
+
+        tmap.put(rp1, 900);
+        Assert.assertTrue(tmap.contains(new ResourcePath("a/b/c")));
+        Assert.assertTrue(tmap.contains(new ResourcePath("a/b/d")));
+        Assert.assertTrue(tmap.contains(new ResourcePath("a/b")));
+    }
+
 }
