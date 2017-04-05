@@ -144,6 +144,9 @@ class TimePeroid implements Comparable<TimePeroid> {
 
     @Override
     public int compareTo(TimePeroid t) {
-        return this.totalAccessTimes - t.getTotalAccessTimes();
+        if (this.totalAccessTimes != t.getTotalAccessTimes()) {
+            return this.totalAccessTimes - t.getTotalAccessTimes();
+        }
+        return (int)(t.getStartTime().getTime() - this.startTime.getTime());
     }
 }
