@@ -40,10 +40,18 @@ public class TopKActiveHostsAnalyser implements Analyser {
     }
 
     public void reportResults() throws IOException {
+
+        ArrayList<String> results = new ArrayList<String>();
+
         for (int i = 0; i < topK; i++) {
             HostActiveness ha = this.activeQueue.poll();
-            this.writer.write(ha.getHostName() + "," + Integer.toString(ha.getAccessTimes()) + "\n");
+            results.add(ha.getHostName() + "," + Integer.toString(ha.getAccessTimes()) + "\n");
         }
+
+        for (int i = results.size() - 1; i >= 0; i--) {
+            this.writer.write(results.get(i));
+        }
+
         this.writer.close();
     }
 }

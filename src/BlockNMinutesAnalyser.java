@@ -28,10 +28,11 @@ public class BlockNMinutesAnalyser implements Analyser {
         ResourcePath path = entry.getHttpRequest().getResourcePath();
         int status = entry.getHttpReply().getStatusCode();
         if (!failedList.containsKey(hostName)) {
-            if (status < 400) {
+            if (!path.equals(LOGIN) || status < 400) {
                 return;
             } else {
-                Block block = new Block(hostName, date, this.detectSeconds, this.blockMinutes, this.maxFailedTimes);
+                Block block = new Block(date, this.detectSeconds, this.blockMinutes, this.maxFailedTimes);
+                block.addOneFailedRecord(date);
                 failedList.put(hostName, block);
             }
             return;
@@ -42,10 +43,13 @@ public class BlockNMinutesAnalyser implements Analyser {
                 if (block.canBlock()) {
                     blockList.add(entry.getEntryString());
                 } else {
+                    if (!path.equals(LOGIN)) {
+                        return;
+                    }
                     if (status < 400) {
                         failedList.remove(hostName);
                     } else {
-                        block.addOneFailedRecord();
+                        block.addOneFailedRecord(date);
                         if (block.canBlock()) {
                             block.setBlockStartTime(date);
                         }
@@ -56,19 +60,33 @@ public class BlockNMinutesAnalyser implements Analyser {
                     if (block.inBlockPeroid(date)) {
                         blockList.add(entry.getEntryString());
                     } else {
-                        if (status < 400) {
-                            failedList.remove(hostName);
-                        } else {
-                            Block newBlock = new Block(hostName, date, this.detectSeconds, this.blockMinutes, this.maxFailedTimes);
+                        failedList.remove(hostName);
+                        if (path.equals(LOGIN) && status >= 400) {
+                            Block newBlock = new Block(date, this.detectSeconds, this.blockMinutes, this.maxFailedTimes);
+                            newBlock.addOneFailedRecord(date);
                             failedList.put(hostName, newBlock);
                         }
                     }
                 } else {
+                    if (!path.equals(LOGIN)) {
+                        return;
+                    }
                     if (status < 400) {
                         failedList.remove(hostName);
                     } else {
-                        Block newBlock = new Block(hostName, date, 20, 5, 3);
+                        ArrayList<Date> failedDates = block.getFailedDates();
+                        Block newBlock = new Block(date, 20, 5, 3);
+                        for (int i = 0; i < failedDates.size(); i++) {
+                            if (date.getTime() - failedDates.get(i).getTime() < 20) {
+                                newBlock.addOneFailedRecord(failedDates.get(i));
+                            }
+                        }
+                        newBlock.addOneFailedRecord(date);
+                        newBlock.setDetectStartTime();
                         failedList.put(hostName, newBlock);
+                        if (newBlock.canBlock()) {
+                            newBlock.setBlockStartTime(date);
+                        }
                     }
                 }
             }
@@ -84,23 +102,23 @@ public class BlockNMinutesAnalyser implements Analyser {
 }
 
 class Block {
-    private String hostName;
     Date detectStartTime;
     Date detectEndTime;
     Date blockStartTime;
     Date blockEndTime;
+    private ArrayList<Date> failedDates;
     private int blockMinutes;
-    private int failedTimes;
+    private int detectSeconds;
     private int maxFailedTimes;
-    public Block(String name, Date start, int detectSeconds, int blockMinutes, int maxFailedTimes) {
-        this.hostName = name;
+    public Block(Date start, int detectSeconds, int blockMinutes, int maxFailedTimes) {
+        this.detectSeconds = detectSeconds;
         this.detectStartTime = start;
         this.detectEndTime = new Date(detectStartTime.getTime() + detectSeconds * 1000);
         this.blockMinutes = blockMinutes;
         this.blockStartTime = null;
         this.blockEndTime = null;
-        this.failedTimes = 1;
         this.maxFailedTimes = maxFailedTimes;
+        this.failedDates = new ArrayList<Date>();
     }
 
     public boolean inBlockPeroid(Date d) {
@@ -111,12 +129,12 @@ class Block {
         return d.before(this.detectEndTime);
     }
 
-    public void addOneFailedRecord() {
-        this.failedTimes++;
+    public void addOneFailedRecord(Date d) {
+        this.failedDates.add(d);
     }
 
-    public String getHostName() {
-        return this.hostName;
+    public ArrayList<Date> getFailedDates() {
+        return this.failedDates;
     }
 
     public void setBlockStartTime(Date d) {
@@ -124,7 +142,12 @@ class Block {
         this.blockEndTime = new Date(d.getTime() + this.blockMinutes * 60 * 1000); 
     }
 
+    public void setDetectStartTime() {
+        this.detectStartTime = failedDates.get(0);
+        this.detectEndTime = new Date(detectStartTime.getTime() + detectSeconds * 1000);
+    }
+
     public boolean canBlock() {
-        return this.failedTimes == this.maxFailedTimes;
+        return this.failedDates.size() == this.maxFailedTimes;
     }
 }

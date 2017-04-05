@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class TopKResourcesConsumeMostBandwidthAnalyser implements Analyser {
+public class TopKResourcesBandwidthAnalyser implements Analyser {
 
     private int topK;
     private FileWriter writer;
@@ -9,7 +9,7 @@ public class TopKResourcesConsumeMostBandwidthAnalyser implements Analyser {
     private PriorityQueue<ResourceBandwidth> queue;
     private Set<ResourceBandwidth> set;
 
-    public TopKResourcesConsumeMostBandwidthAnalyser(int k, String outputPath) throws IOException {
+    public TopKResourcesBandwidthAnalyser(int k, String outputPath) throws IOException {
         this.topK = k;
         this.writer = new FileWriter(outputPath); 
         this.resourcesMap = new ResourcePathMap();
@@ -44,10 +44,18 @@ public class TopKResourcesConsumeMostBandwidthAnalyser implements Analyser {
     }
 
     public void reportResults() throws IOException {
+
+        ArrayList<String> results = new ArrayList<String>();
+
         for (int i = 0; i < topK; i++) {
             ResourceBandwidth rb = this.queue.poll();
-            this.writer.write(rb.getResourceName() + "\n");
+            results.add(rb.getResourceName() + "\n");
         }
+
+        for (int i = results.size() - 1; i >= 0; i--) {
+            this.writer.write(results.get(i));
+        }
+
         this.writer.close();
     }
 }

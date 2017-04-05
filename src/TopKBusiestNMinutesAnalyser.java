@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
+
 public class TopKBusiestNMinutesAnalyser {
+
     private int topK;
     private FileWriter writer;
     private PriorityQueue<TimePeroid> queue;
@@ -46,15 +48,24 @@ public class TopKBusiestNMinutesAnalyser {
     }
 
     public void reportResults() throws IOException {
+
+        ArrayList<String> results = new ArrayList<String>();
+
         for (int i = 0; i < topK; i++) {
             TimePeroid tp = this.queue.poll();
-            this.writer.write(tp.getTimeString() + "," + Integer.toString(tp.getTotalAccessTimes()) + "\n");
+            results.add(tp.getTimeString() + "," + Integer.toString(tp.getTotalAccessTimes()) + "\n");
         }
+
+        for (int i = results.size() - 1; i >= 0; i--) {
+            this.writer.write(results.get(i));
+        }
+
         this.writer.close();
     }
 }
 
 class TimePeroid implements Comparable<TimePeroid> {
+
     private String timeString;
     private Date startTime;
     private Date endTime;
