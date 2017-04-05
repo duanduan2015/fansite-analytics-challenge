@@ -6,7 +6,7 @@ public class BlockNMinutesAnalyser implements Analyser {
     private int blockMinutes;
     private int maxFailedTimes;
     private FileWriter writer;
-    private ArrayList<String> blockList;
+    //private ArrayList<String> blockList;
     private HashMap<String, Block> failedList;
 	private static final ResourcePath LOGIN = new ResourcePath("/login");
 
@@ -15,10 +15,11 @@ public class BlockNMinutesAnalyser implements Analyser {
         this.detectSeconds = detectPeroid;
         this.blockMinutes = blockPeroid;
         this.maxFailedTimes = max;
-        this.blockList = new ArrayList<String>();
+        //this.blockList = new ArrayList<String>();
         this.failedList = new HashMap<String, Block>();
     }
-
+    
+    @Override
     public void analyze(LogEntry entry) {
         if (entry.getHttpRequest() == null) {
             return;
@@ -41,7 +42,11 @@ public class BlockNMinutesAnalyser implements Analyser {
             Block block = failedList.get(hostName);
             if (block.inDetectPeroid(date)) {
                 if (block.canBlock()) {
-                    blockList.add(entry.getEntryString());
+                    try {
+                        doBlock(entry);
+                    } catch(IOException e) {
+                        throw new IllegalArgumentException("Unable to block address'" + entry.getEntryString());
+                    }
                 } else {
                     if (!path.equals(LOGIN)) {
                         return;
@@ -58,7 +63,11 @@ public class BlockNMinutesAnalyser implements Analyser {
             } else {
                 if (block.canBlock()) {
                     if (block.inBlockPeroid(date)) {
-                        blockList.add(entry.getEntryString());
+                        try {
+                            doBlock(entry);
+                        } catch(IOException e) {
+                            throw new IllegalArgumentException("Unable to block address'" + entry.getEntryString());
+                        }
                     } else {
                         failedList.remove(hostName);
                         if (path.equals(LOGIN) && status >= 400) {
@@ -93,11 +102,13 @@ public class BlockNMinutesAnalyser implements Analyser {
         }
     }
 
+    @Override
     public void reportResults() throws IOException {
-        for (String s : blockList) {
-            this.writer.write(s + "\n");
-        }
         this.writer.close();
+    }
+
+    private void doBlock(LogEntry entry) throws IOException {
+        this.writer.write(entry.getEntryString() + "\n");
     }
 }
 
