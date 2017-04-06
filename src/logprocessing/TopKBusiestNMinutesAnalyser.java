@@ -12,156 +12,136 @@ import java.io.*;
 */
 public class TopKBusiestNMinutesAnalyser implements Analyser {
 
-    private int topK;
+    private AccessList accessList;
     private FileWriter writer;
-    private PriorityQueue<TimePeroid> queue;
-    private LinkedList<LogEntry> list;
-    private int minutes;
-    private TimePeroid currentTimePeroid;
 
     public TopKBusiestNMinutesAnalyser(int k, int minutes, File file) throws IOException {
-        this.topK = k;
         this.writer = new FileWriter(file); 
-        this.queue = new PriorityQueue<TimePeroid>();
-        this.list = new LinkedList<LogEntry>();
-        this.minutes = minutes;
-        this.currentTimePeroid = null;
+        this.accessList = new AccessList(k, minutes * 60000L);
     }
 
     @Override
     public void analyze(LogEntry entry) {
-        if (this.currentTimePeroid == null) {
-            list.add(entry);
-            this.currentTimePeroid = new TimePeroid(entry.getDateString(), entry.getAccessDate(), this.minutes);
-        } else {
-            if (this.currentTimePeroid.inTimePeroid(entry.getAccessDate())) {
-                list.add(entry);
-                this.currentTimePeroid.addOneAccess();
-            } else {
-                queue.offer(this.currentTimePeroid);
-                Date start = this.currentTimePeroid.getStartTime();
-                while (!list.isEmpty()) {
-                    LogEntry e = list.peek();
-                    if (e.getAccessDate().equals(start)) {
-                        list.removeFirst();
-                    } else {
-                        this.currentTimePeroid = new TimePeroid(e.getDateString(), e.getAccessDate(), this.minutes);
-                        this.currentTimePeroid.addNAccess(list.size() - 1);
-                        break;
-                    }
-                }
-            }
-        }
-        if (queue.size() > topK) {
-            queue.poll();
-        }
-    }
 
-    private void complementTopK() {
+        long timestamp = entry.getAccessDate().getTime();
+        String dateString = entry.getDateString();
 
-        if (this.list.size() == 0) {
-            return;
-        }
-
-        LogEntry entry = this.list.poll();
-        TimePeroid current = new TimePeroid(entry.getDateString(), 1, entry.getAccessDate());
-        current.addNAccess(this.list.size());
-
-        while (!this.list.isEmpty()) {
-            LogEntry next = this.list.poll();
-            if (next.getAccessDate().equals(current.getStartTime())) {
-                continue;
-            }
-            this.queue.offer(current);
-            current = new TimePeroid(next.getDateString(), 1, next.getAccessDate());
-            current.addNAccess(this.list.size());
-        }
-
-        this.queue.offer(current);
-
-        while (this.queue.size() > this.topK) {
-            this.queue.poll();
-        }
-
+        accessList.add(timestamp, dateString);
     }
 
     @Override
     public void reportResults() throws IOException {
 
-        ArrayList<String> results = new ArrayList<String>();
+        accessList.forceFillRank();
 
-        complementTopK();
-
-        while (!this.queue.isEmpty()) {
-            TimePeroid tp = this.queue.poll();
-            results.add(tp.getTimeString() + "," + Integer.toString(tp.getTotalAccessTimes()) + "\n");
-        }
-        
-
-        for (int i = results.size() - 1; i >= 0; i--) {
-            this.writer.write(results.get(i));
+        for (AccessList.BusyPeriod bp: this.accessList.toList()) {
+            this.writer.write(String.format("%s,%d%n", bp.getStartString(),
+                        bp.getNumberOfAccess()));
         }
 
         this.writer.close();
     }
 }
 
-/**
- * TimePeroid is used to record the 
- * information of a 60 minutes peroid
- * in order to get a rank of every 60
- * minutes peroid.
- */
-class TimePeroid implements Comparable<TimePeroid> {
+class AccessList {
 
-    private String timeString;
-    private Date startTime;
-    private Date endTime;
-    private int totalAccessTimes;
+    private final long PERIOD_LIMIT;
+    private final int RANKING_LIMIT;
+    private int count;
+    private LinkedList<Access> accessList;
+    private PriorityQueue<Access> accessRank;
 
-    public TimePeroid (String string, Date start, int minutes) {
-        this.timeString = string;
-        this.startTime = start;
-        this.endTime = new Date(this.startTime.getTime() + (long) minutes * 60 * 1000);
-        this.totalAccessTimes = 1;
-        
-    }
-    
-    public TimePeroid (String string, int accessTimes, Date date) {
-        this.timeString = string;
-        this.totalAccessTimes = accessTimes;
-        this.startTime = date;
-    }
+    static public class BusyPeriod {
+        private String start;
+        private int nAccess;
 
-    public boolean inTimePeroid(Date d) {
-        return this.endTime.after(d);
-    }
-
-    public void addOneAccess() {
-        this.totalAccessTimes++;
-    }
-
-    public void addNAccess(int n) {
-        this.totalAccessTimes += n;
-    }
-
-    public String getTimeString() {
-        return this.timeString;
-    }
-
-    public int getTotalAccessTimes() {
-        return this.totalAccessTimes;
-    }
-
-    public Date getStartTime() {
-        return this.startTime;
-    }
-
-    @Override
-    public int compareTo(TimePeroid t) {
-        if (this.totalAccessTimes != t.getTotalAccessTimes()) {
-            return this.totalAccessTimes - t.getTotalAccessTimes();
+        BusyPeriod(String start, int nAccess) {
+            this.start = start;
+            this.nAccess = nAccess;
         }
-        return (int)(t.getStartTime().getTime() - this.startTime.getTime());
+
+        public String getStartString() {
+            return start;
+        }
+
+        public int getNumberOfAccess() {
+            return nAccess;
+        }
+    }
+
+    static private class Access implements Comparable<Access>{
+        long timestamp;
+        int count;
+        String dateString;
+
+        Access(long timestamp, int initCount, String dateString) {
+            this.timestamp = timestamp;
+            this.count = initCount;
+            this.dateString = dateString;
+        }
+
+        public int compareTo(Access other) {
+            return this.count > other.count ? 1 :
+                this.count < other.count ? -1 : 0;
+        }
+    }
+
+    public AccessList(int size, long period) {
+        this.PERIOD_LIMIT = period;
+        this.RANKING_LIMIT = size;
+        this.count = 0;
+        this.accessList = new LinkedList<Access>();
+        this.accessRank = new PriorityQueue<Access>();
+    }
+
+    public long getOldest() {
+        return accessList.getFirst().timestamp;
+    }
+
+    public void add(long ts, String raw) {
+
+        while (accessList.size() > 0 && ts - accessList.getFirst().timestamp >= this.PERIOD_LIMIT) {
+            Access evicted = accessList.pollFirst();
+            this.count -= evicted.count;
+            evicted.count += this.count;
+
+            accessRank.offer(evicted);
+            if (accessRank.size() > RANKING_LIMIT) {
+                accessRank.poll();
+            }
+        }
+
+        if (accessList.size() == 0 || accessList.getLast().timestamp != ts) {
+            accessList.addLast(new Access(ts, 1, raw));
+        } else {
+            accessList.getLast().count += 1;
+        }
+        this.count += 1;
+    }
+
+    public int size() {
+        return count;
+    }
+
+    public List<BusyPeriod> toList() {
+        LinkedList<BusyPeriod> result = new LinkedList<BusyPeriod>();
+        while (accessRank.size() > 0) {
+            Access access = accessRank.poll();
+            result.addFirst(new BusyPeriod(access.dateString, access.count));
+        }
+        return Collections.unmodifiableList(result);
+    }
+
+    public void forceFillRank() {
+
+        int accessLeft = count;
+        for (Access oldItem: accessList) {
+            accessRank.offer(new Access(oldItem.timestamp, accessLeft, oldItem.dateString));
+            if (accessRank.size() > RANKING_LIMIT) {
+                accessRank.poll();
+            }
+            accessLeft -= oldItem.count;
+        }
     }
 }
+
