@@ -3,7 +3,7 @@ import tools.*;
 import java.util.*;
 import java.io.*;
 
-public class TopKBusiestNMinutesAnalyser {
+public class TopKBusiestNMinutesAnalyser implements Analyser {
 
     private int topK;
     private FileWriter writer;
