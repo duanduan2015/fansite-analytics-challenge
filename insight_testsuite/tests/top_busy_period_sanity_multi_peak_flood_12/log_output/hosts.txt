@@ -1,0 +1,10 @@
+www.peak3.com,40
+www.peak4.com,40
+www.peak9.com,39
+www.peak12.com,38
+www.peak2.com,38
+www.peak1.com,37
+www.peak5.com,36
+www.peak11.com,35
+www.peak7.com,33
+www.peak8.com,31

@@ -1,0 +1,8 @@
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "GET /shuttle/countdown/ HTTP/1.0" 200 3985
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "POST /shuttle/countdown/ HTTP/1.0" 200 3985
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "PUT /shuttle/countdown/ HTTP/1.0" 200 3985
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "DELETE /shuttle/countdown/ HTTP/1.0" 200 3985
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "CONNECT /shuttle/countdown/ HTTP/1.0" 200 3985
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "OPTIONS /shuttle/countdown/ HTTP/1.0" 200 3985
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "TRACE /shuttle/countdown/ HTTP/1.0" 200 3985
+

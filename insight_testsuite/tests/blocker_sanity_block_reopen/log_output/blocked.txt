@@ -1,0 +1,5 @@
+199.72.81.55 - - [01/Jul/1995:00:01:01 -0400] “GET /should/be/blocked HTTP/1.0” 200 123
+199.72.81.55 - - [01/Jul/1995:00:02:01 -0400] “GET /should/be/blocked HTTP/1.0” 200 123
+199.72.81.55 - - [01/Jul/1995:00:05:01 -0400] “GET /should/be/blocked HTTP/1.0” 200 123
+199.72.81.55 - - [01/Jul/1995:00:05:59 -0400] “GET /should/be/blocked HTTP/1.0” 200 123
+some.other.site - - [01/Jul/1995:00:12:01 -0400] “GET /should/be/blocked HTTP/1.0” 200 123

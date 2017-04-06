@@ -1,0 +1,10 @@
+129.188.154.200,33
+teleman.pr.mcs.net,31
+dnet018.sat.texas.net,25
+ix-sd11-26.ix.netcom.com,24
+link097.txdirect.net,22
+charger.execpc.com,20
+ix-war-mi1-20.ix.netcom.com,19
+ppp-mia-53.shadow.net,17
+dynip38.efn.org,17
+www-a1.proxy.aol.com,15
