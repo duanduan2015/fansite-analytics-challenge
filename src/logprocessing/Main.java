@@ -32,6 +32,6 @@ public class Main {
         resourcesAnalyser.reportResults();
         busiestHoursAnalyser.reportResults();
         blockAnalyser.reportResults();
-
+        i++;
     }
 }
