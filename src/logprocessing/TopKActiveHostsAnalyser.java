@@ -2,6 +2,15 @@ package logprocessing;
 import tools.*;
 import java.util.*;
 import java.io.*;
+
+/**
+* TopKActiveHostsAnalyser implements the function
+* to analyse every entry and get the top K (10)
+* most active client address in realtime.
+*
+* @author Yunduan Han 
+*/
+
 public class TopKActiveHostsAnalyser implements Analyser {
 
     private int topK;
@@ -18,6 +27,11 @@ public class TopKActiveHostsAnalyser implements Analyser {
         this.set = new HashSet<HostActiveness>();
     }
 
+    @Override
+    /**
+     * Analyze one entry and get current rank for
+     * top k (10) most active clients.
+     */
     public void analyze(LogEntry entry) {
         ClientAddress address = entry.getAddress();
         int time = 0;
@@ -41,6 +55,10 @@ public class TopKActiveHostsAnalyser implements Analyser {
         }
     }
 
+    @Override
+    /**
+     * Report the final result to the output file.
+     */
     public void reportResults() throws IOException {
 
         ArrayList<String> results = new ArrayList<String>();
@@ -57,6 +75,11 @@ public class TopKActiveHostsAnalyser implements Analyser {
         this.writer.close();
     }
 }
+
+/**
+ * HostActiveness is used to store the host name and its
+ * access times.
+ */
 
 class HostActiveness implements Comparable<HostActiveness> {
     private String host;

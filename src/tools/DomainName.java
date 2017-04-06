@@ -1,8 +1,16 @@
 package tools;
 import java.util.*;
+
+/**
+ * DomainName parsed a string to
+ * generate a layered name list.
+ * @author Yunduan Han
+ */
 public class DomainName implements Segmentisable {
+
     private List<String> segments;
     private String name;
+
     public DomainName(String s) {
         this.name = s;
         String[] layers = s.split("\\.");

@@ -1,6 +1,15 @@
 package tools;
 import java.util.regex.*;
 
+/**
+ * HttpRquest parses the a string 
+ * to get the http method and the 
+ * resource path to generate a 
+ * HttpRequest object for further 
+ * analyzing.
+ *
+ * @author Yunduan Han
+ */
 public class HttpRequest {
 
     private String method;

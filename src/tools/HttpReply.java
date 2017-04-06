@@ -1,6 +1,13 @@
 package tools;
 import java.util.*;
 
+/**
+ * HttpReply parses the code string 
+ * and bytes string to generate a HttpReply 
+ * object to represents a http reply.
+ *
+ * @author Yunduan Han
+ */
 public class HttpReply {
     private int status;
     private long numOfBytes;

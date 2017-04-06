@@ -3,6 +3,13 @@ import tools.*;
 import java.util.*;
 import java.io.*;
 
+/**
+* TopKBusiestNMinutesAnalyser implements the function
+* to analyse every entry and get the top K (10)
+* busiest hour peroid resources. 
+*
+* @author Yunduan Han 
+*/
 public class TopKBusiestNMinutesAnalyser implements Analyser {
 
     private int topK;
@@ -21,6 +28,7 @@ public class TopKBusiestNMinutesAnalyser implements Analyser {
         this.currentTimePeroid = null;
     }
 
+    @Override
     public void analyze(LogEntry entry) {
         if (this.currentTimePeroid == null) {
             list.add(entry);
@@ -77,6 +85,7 @@ public class TopKBusiestNMinutesAnalyser implements Analyser {
 
     }
 
+    @Override
     public void reportResults() throws IOException {
 
         ArrayList<String> results = new ArrayList<String>();
@@ -97,6 +106,12 @@ public class TopKBusiestNMinutesAnalyser implements Analyser {
     }
 }
 
+/**
+ * TimePeroid is used to record the 
+ * information of a 60 minutes peroid
+ * in order to get a rank of every 60
+ * minutes peroid.
+ */
 class TimePeroid implements Comparable<TimePeroid> {
 
     private String timeString;

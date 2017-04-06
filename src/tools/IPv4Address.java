@@ -1,9 +1,17 @@
 package tools;
 import java.util.*;
 
+/**
+ * IPv4Address converts a IP styled string
+ * to a 32 bit IPv4 address and generated a
+ * IPv4Address object for further analyzing. 
+ *
+ * @author Yunduan Han
+ */
 public class IPv4Address implements Comparable<IPv4Address> {
     
     private Integer integerAddress;
+
     public IPv4Address (String s) {
         String[] parts = s.split("\\.");
         if (parts.length != 4) {

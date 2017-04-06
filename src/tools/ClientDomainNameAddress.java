@@ -1,5 +1,11 @@
 package tools;
 import java.util.*;
+
+/**
+ * ClientDomainNameAddress implements a DomainName
+ * to represnet the clients' domain name address.
+ * @author Yunduan Han
+ */
 public class ClientDomainNameAddress extends DomainName implements ClientAddress {
 
     private String addressString;

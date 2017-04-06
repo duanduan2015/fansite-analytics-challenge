@@ -1,6 +1,13 @@
 package tools;
 import java.util.*;
 
+/**
+ * ResourcePath parses a string
+ * to generate a layer name list
+ * of this resource address.
+ *
+ * @author Yunduan Han
+ */
 public class ResourcePath implements Segmentisable {
 
     private List<String> segments;

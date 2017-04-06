@@ -1,6 +1,14 @@
 package tools;
 import java.util.*;
 
+/**
+ * ClientAddressMap manage a general map of 
+ * client addresses, it includes a TreeMap for 
+ * IP address and a PrefixTree map for domain
+ * name address.
+ *
+ * @author Yunduan Han
+ */
 public class ClientAddressMap {
     private TreeMap<Integer, Integer> ipTreeMap;
     private PrefixTree<ClientDomainNameAddress, Integer> domainTreeMap;
@@ -10,6 +18,9 @@ public class ClientAddressMap {
         this.domainTreeMap = new PrefixTree<ClientDomainNameAddress, Integer>();
     }
 
+    /**
+     * Determine whether a cliendAddress is in this map.
+     */
     public boolean contains(ClientAddress address) {
         if (address.isIPAddress()) {
             ClientIPv4Address ad = (ClientIPv4Address) address;
@@ -22,6 +33,9 @@ public class ClientAddressMap {
         return false;
     }
 
+    /**
+     * Put a (key, value) pair in this map.
+     */
     public void put(ClientAddress address, Integer value) {
         if (address.isIPAddress()) {
             ClientIPv4Address ad = (ClientIPv4Address) address;
@@ -33,6 +47,9 @@ public class ClientAddressMap {
         }
     }
 
+    /**
+     * Get a value according to a address key.
+     */
     public Integer get(ClientAddress address) {
         if (address.isIPAddress()) {
             ClientIPv4Address ad = (ClientIPv4Address) address;
@@ -53,10 +70,16 @@ public class ClientAddressMap {
         return null; 
     }
 
+    /**
+     * Return the PrefixTree in this map.
+     */
     public PrefixTree<ClientDomainNameAddress, Integer> getDomainTreeMap() {
         return this.domainTreeMap;
     }
 
+    /**
+     * Return the TreeMap in this map
+     */
     public TreeMap<Integer, Integer> getIPTreeMap() {
         return this.ipTreeMap;
     }

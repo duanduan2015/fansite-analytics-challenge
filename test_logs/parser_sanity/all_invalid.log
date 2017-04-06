@@ -1,0 +1,178 @@
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Mar20 ?        00:00:08 /usr/lib/systemd/systemd --switched-root --system --deserialize 23
+root         2     0  0 Mar20 ?        00:00:00 [kthreadd]
+root         3     2  0 Mar20 ?        00:00:00 [ksoftirqd/0]
+root         5     2  0 Mar20 ?        00:00:00 [kworker/0:0H]
+root         7     2  0 Mar20 ?        00:03:31 [rcu_sched]
+root         8     2  0 Mar20 ?        00:00:00 [rcu_bh]
+root         9     2  0 Mar20 ?        00:04:07 [rcuos/0]
+root        10     2  0 Mar20 ?        00:00:00 [rcuob/0]
+root        11     2  0 Mar20 ?        00:00:00 [migration/0]
+root        12     2  0 Mar20 ?        00:00:00 [lru-add-drain]
+root        13     2  0 Mar20 ?        00:00:01 [watchdog/0]
+root        14     2  0 Mar20 ?        00:00:00 [cpuhp/0]
+root        15     2  0 Mar20 ?        00:00:00 [cpuhp/1]
+root        16     2  0 Mar20 ?        00:00:00 [watchdog/1]
+root        17     2  0 Mar20 ?        00:00:00 [migration/1]
+root        18     2  0 Mar20 ?        00:00:07 [ksoftirqd/1]
+root        20     2  0 Mar20 ?        00:00:00 [kworker/1:0H]
+root        21     2  0 Mar20 ?        00:01:48 [rcuos/1]
+root        22     2  0 Mar20 ?        00:00:00 [rcuob/1]
+root        23     2  0 Mar20 ?        00:00:00 [kdevtmpfs]
+root        24     2  0 Mar20 ?        00:00:00 [netns]
+root        25     2  0 Mar20 ?        00:00:00 [oom_reaper]
+root        26     2  0 Mar20 ?        00:00:00 [writeback]
+root        27     2  0 Mar20 ?        00:00:00 [kcompactd0]
+root        28     2  0 Mar20 ?        00:00:00 [ksmd]
+root        29     2  0 Mar20 ?        00:00:00 [khugepaged]
+root        30     2  0 Mar20 ?        00:00:00 [crypto]
+root        31     2  0 Mar20 ?        00:00:00 [kintegrityd]
+root        32     2  0 Mar20 ?        00:00:00 [bioset]
+root        33     2  0 Mar20 ?        00:00:00 [kblockd]
+root        36     2  0 Mar20 ?        00:00:00 [ata_sff]
+root        37     2  0 Mar20 ?        00:00:00 [md]
+root        38     2  0 Mar20 ?        00:00:00 [devfreq_wq]
+root        39     2  0 Mar20 ?        00:00:00 [watchdogd]
+root        41     2  0 Mar20 ?        00:00:03 [kswapd0]
+root        42     2  0 Mar20 ?        00:00:00 [vmstat]
+root        88     2  0 Mar20 ?        00:00:00 [kthrotld]
+root        89     2  0 Mar20 ?        00:00:00 [acpi_thermal_pm]
+root        90     2  0 Mar20 ?        00:00:00 [scsi_eh_0]
+root        91     2  0 Mar20 ?        00:00:00 [scsi_tmf_0]
+root        92     2  0 Mar20 ?        00:00:00 [scsi_eh_1]
+root        93     2  0 Mar20 ?        00:00:00 [scsi_tmf_1]
+root        94     2  0 Mar20 ?        00:00:00 [scsi_eh_2]
+root        95     2  0 Mar20 ?        00:00:00 [scsi_tmf_2]
+root        96     2  0 Mar20 ?        00:00:00 [scsi_eh_3]
+root        97     2  0 Mar20 ?        00:00:00 [scsi_tmf_3]
+root        98     2  0 Mar20 ?        00:00:00 [scsi_eh_4]
+root        99     2  0 Mar20 ?        00:00:00 [scsi_tmf_4]
+root       100     2  0 Mar20 ?        00:00:00 [scsi_eh_5]
+root       101     2  0 Mar20 ?        00:00:00 [scsi_tmf_5]
+root       108     2  0 Mar20 ?        00:00:00 [dm_bufio_cache]
+root       109     2  0 Mar20 ?        00:00:00 [ipv6_addrconf]
+root       124     2  0 Mar20 ?        00:00:00 [bioset]
+root       167     2  0 Mar20 ?        00:00:00 [kauditd]
+root       321     2  0 Mar20 ?        00:00:00 [kworker/0:1H]
+root       322     2  0 Mar20 ?        00:00:00 [kworker/1:1H]
+root       352     2  0 Mar20 ?        00:00:00 [ttm_swap]
+root       392     2  0 Mar20 ?        00:00:00 [kdmflush]
+root       393     2  0 Mar20 ?        00:00:00 [bioset]
+root       404     2  0 Mar20 ?        00:00:00 [kdmflush]
+root       405     2  0 Mar20 ?        00:00:00 [bioset]
+root       425     2  0 Mar20 ?        00:00:01 [jbd2/dm-0-8]
+root       426     2  0 Mar20 ?        00:00:00 [ext4-rsv-conver]
+root       514     1  0 Mar20 ?        00:00:05 /usr/lib/systemd/systemd-journald
+root       546     2  0 Mar20 ?        00:00:00 [rpciod]
+root       547     2  0 Mar20 ?        00:00:00 [xprtiod]
+root       553     1  0 Mar20 ?        00:00:02 /usr/lib/systemd/systemd-udevd
+root       571     2  0 Mar20 ?        00:00:00 [edac-poller]
+root       627     2  0 Mar20 ?        00:00:00 [jbd2/sda1-8]
+root       628     2  0 Mar20 ?        00:00:00 [ext4-rsv-conver]
+root       632     2  0 Mar20 ?        00:00:00 [kdmflush]
+root       633     2  0 Mar20 ?        00:00:00 [bioset]
+root       647     2  0 Mar20 ?        00:00:03 [jbd2/dm-2-8]
+root       648     2  0 Mar20 ?        00:00:00 [ext4-rsv-conver]
+root       676     1  0 Mar20 ?        00:00:00 /sbin/auditd
+root       678   676  0 Mar20 ?        00:00:00 /sbin/audispd
+root       680   678  0 Mar20 ?        00:00:00 /usr/sbin/sedispatch
+root       699     1  0 Mar20 ?        00:00:09 /usr/libexec/accounts-daemon
+rtkit      700     1  0 Mar20 ?        00:00:05 /usr/libexec/rtkit-daemon
+root       702     1  0 Mar20 ?        00:00:00 /usr/sbin/mcelog --ignorenodev --daemon --foreground
+root       703     1  0 Mar20 ?        00:00:02 /usr/lib/systemd/systemd-logind
+dbus       705     1  0 Mar20 ?        00:00:04 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root       726     1  0 Mar20 ?        00:00:01 /usr/bin/python3 -Es /usr/sbin/firewalld --nofork --nopid
+root       735     1  0 Mar20 ?        00:00:45 /usr/sbin/irqbalance --foreground
+root       736     1  0 Mar20 ?        00:00:01 /usr/sbin/rsyslogd -n
+avahi      738     1  0 Mar20 ?        00:00:48 avahi-daemon: running [vsclab-node0.local]
+root       739     1  0 Mar20 ?        00:00:00 /usr/sbin/ModemManager
+root       740     1  0 Mar20 ?        00:00:00 /usr/sbin/alsactl -s -n 19 -c -E ALSA_CONFIG_PATH=/etc/alsa/alsactl.conf --initfile=/lib/alsa/init/00main rdaemon
+root       741     1  0 Mar20 ?        00:00:00 /usr/sbin/smartd -n -q never
+root       745     1  0 Mar20 ?        00:00:00 /usr/sbin/abrtd -d -s
+avahi      759   738  0 Mar20 ?        00:00:00 avahi-daemon: chroot helper
+chrony     766     1  0 Mar20 ?        00:00:01 /usr/sbin/chronyd
+polkitd    787     1  0 Mar20 ?        00:00:00 /usr/lib/polkit-1/polkitd --no-debug
+root       845     1  0 Mar20 ?        00:00:00 /usr/sbin/gssproxy -D
+root       860     1  0 Mar20 ?        00:00:00 /usr/bin/abrt-dump-journal-oops -fxtD
+root       862     1  0 Mar20 ?        00:00:00 /usr/bin/abrt-dump-journal-xorg -fxtD
+root       876     1  0 Mar20 ?        00:00:06 /usr/sbin/NetworkManager --no-daemon
+root       889     1  0 Mar20 ?        00:00:00 /usr/sbin/sshd -D
+root       892     1  0 Mar20 ?        00:00:30 /usr/libexec/docker/docker-containerd-current --listen unix:///run/containerd.sock --shim /usr/libexec/docker/docker-containerd-shim-current --start-timeout 2m
+root       895     1  0 Mar20 ?        00:05:44 /usr/bin/dockerd-current --add-runtime oci=/usr/libexec/docker/docker-runc-current --default-runtime=oci --containerd /run/containerd.sock --exec-opt native.cgroupdriver=systemd --userland-proxy-path=/usr/libexec/docker/docker-proxy-current --selinux-enabled --log-driver=journald
+root       907     1  0 Mar20 ?        00:00:01 /usr/sbin/crond -n
+root       914     1  0 Mar20 ?        00:00:00 /usr/sbin/atd -f
+root       915     1  0 Mar20 ?        00:00:00 /usr/sbin/lightdm
+root       976   915  5 Mar20 tty1     20:07:44 /usr/libexec/Xorg -background none :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt1 -novtswitch
+root      1027     2  0 Mar20 ?        00:00:00 [bioset]
+root      1029     2  0 Mar20 ?        00:00:00 [loop0]
+root      1032     2  0 Mar20 ?        00:00:00 [bioset]
+root      1033     2  0 Mar20 ?        00:00:00 [loop1]
+root      1035     2  0 Mar20 ?        00:00:00 [kdmflush]
+root      1044     2  0 Mar20 ?        00:00:00 [bioset]
+root      1045     2  0 Mar20 ?        00:00:00 [kcopyd]
+root      1047     2  0 Mar20 ?        00:00:00 [bioset]
+root      1048     2  0 Mar20 ?        00:00:00 [dm-thin]
+root      1049     2  0 Mar20 ?        00:00:00 [bioset]
+root      1118   876  0 Mar20 ?        00:00:00 /sbin/dhclient -d -q -sf /usr/libexec/nm-dhcp-helper -pf /var/run/dhclient-enp4s0.pid -lf /var/lib/NetworkManager/dhclient-ce694d3a-075b-3614-856f-047124701e87-enp4s0.lease -cf /var/lib/NetworkManager/dhclient-enp4s0.conf enp4s0
+root      1307   915  0 Mar20 ?        00:00:00 lightdm --session-child 12 19
+hzhao     1334     1  0 Mar20 ?        00:00:31 /usr/bin/gnome-keyring-daemon --daemonize --login
+hzhao     1336     1  0 Mar20 ?        00:00:00 /usr/lib/systemd/systemd --user
+hzhao     1338  1336  0 Mar20 ?        00:00:00 (sd-pam)
+hzhao     1342  1307  0 Mar20 ?        00:00:02 mate-session
+hzhao     1353  1336  0 Mar20 ?        00:00:04 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+hzhao     1417  1336  0 Mar20 ?        00:00:00 /usr/libexec/imsettings-daemon
+hzhao     1420  1336  0 Mar20 ?        00:00:00 /usr/libexec/gvfsd
+hzhao     1425  1336  0 Mar20 ?        00:02:04 /usr/libexec/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+hzhao     1507  1342  0 Mar20 ?        00:00:02 /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "mate-session"
+hzhao     1526  1336  0 Mar20 ?        00:00:00 /usr/libexec/at-spi-bus-launcher
+hzhao     1531  1526  0 Mar20 ?        00:00:05 /bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 3
+hzhao     1535  1336  0 Mar20 ?        00:00:15 /usr/libexec/at-spi2-registryd --use-gnome-session
+hzhao     1539  1336  0 Mar20 ?        00:00:00 /usr/libexec/dconf-service
+hzhao     1548  1342  0 Mar20 ?        00:04:30 /usr/libexec/mate-settings-daemon
+hzhao     1552  1342  0 Mar20 ?        00:10:41 marco
+hzhao     1556  1342  0 Mar20 ?        00:02:21 mate-panel
+hzhao     1560  1342  0 Mar20 ?        00:00:25 caja
+hzhao     1565     1  0 Mar20 ?        00:00:37 /usr/bin/pulseaudio --start --log-target=syslog
+hzhao     1572  1336  0 Mar20 ?        00:01:01 /usr/libexec/mate-panel/wnck-applet
+hzhao     1584  1342  0 Mar20 ?        00:00:14 mate-screensaver
+hzhao     1636  1342  0 Mar20 ?        00:00:13 mate-power-manager
+hzhao     1642  1336  0 Mar20 ?        00:00:16 /usr/libexec/gvfs-udisks2-volume-monitor
+hzhao     1644  1342  0 Mar20 ?        00:00:00 /usr/bin/python3 /usr/share/system-config-printer/applet.py
+root      1650     1  0 Mar20 ?        00:02:57 /usr/libexec/udisks2/udisksd --no-debug
+hzhao     1653  1342  0 Mar20 ?        00:00:04 nm-applet
+hzhao     1655  1342  0 Mar20 ?        00:00:01 mate-volume-control-applet
+hzhao     1666  1342  0 Mar20 ?        00:00:02 python3 /usr/bin/blueman-applet
+hzhao     1674  1336  0 Mar20 ?        00:00:00 /usr/libexec/gvfs-afc-volume-monitor
+hzhao     1678  1342  0 Mar20 ?        00:00:01 abrt-applet
+hzhao     1682  1342  0 Mar20 ?        00:00:00 /usr/bin/seapplet
+hzhao     1692  1342  0 Mar20 ?        00:00:01 /usr/libexec/polkit-mate-authentication-agent-1
+root      1721     1  0 Mar20 ?        00:00:00 /usr/libexec/upowerd
+hzhao     1743  1336  0 Mar20 ?        00:00:00 /usr/libexec/gvfs-gphoto2-volume-monitor
+hzhao     1766  1336  0 Mar20 ?        00:00:00 /usr/libexec/gvfsd-trash --spawner :1.5 /org/gtk/gvfs/exec_spaw/0
+root      1786     1  0 Mar20 ?        00:00:00 /usr/sbin/abrt-dbus -t133
+hzhao     1792  1336  0 Mar20 ?        00:00:00 /usr/libexec/gvfs-mtp-volume-monitor
+hzhao     1802  1336  0 Mar20 ?        00:21:53 /usr/libexec/mate-panel/clock-applet
+hzhao     1805  1336  1 Mar20 ?        07:04:27 /usr/libexec/mate-applets/mate-multiload-applet
+hzhao     1806  1336  0 Mar20 ?        00:00:01 /usr/libexec/mate-panel/notification-area-applet
+root      1829     1  0 Mar20 ?        00:00:00 /usr/sbin/cupsd -l
+hzhao     1931     1  0 Mar20 ?        00:17:08 synergys
+hzhao     2706  2936  0 Apr04 pts/3    00:00:00 bash
+hzhao     2936     1  0 Apr03 ?        00:03:28 mate-terminal
+hzhao     5126  2936  0 Apr04 pts/0    00:00:00 bash
+root      6096     2  0 09:05 ?        00:00:00 [kworker/0:1]
+root      6135     2  0 09:54 ?        00:00:00 [kworker/u16:2]
+root      6149     2  0 10:01 ?        00:00:01 [kworker/1:1]
+root      6156     2  0 10:06 ?        00:00:00 [kworker/0:2]
+root      6413     2  0 10:27 ?        00:00:01 [kworker/1:0]
+root      7253     2  0 10:34 ?        00:00:00 [kworker/1:2]
+root      7254     2  0 10:37 ?        00:00:00 [kworker/u16:0]
+root      7255     2  0 10:38 ?        00:00:00 [kworker/1:3]
+root      7257     2  0 10:43 ?        00:00:00 [kworker/1:4]
+root      7292     2  0 10:44 ?        00:00:00 [kworker/u16:1]
+hzhao     7470  5126  0 10:45 pts/0    00:00:00 ps -ef
+hzhao    17499     1  0 Apr03 ?        00:00:03 tmux new -As main
+hzhao    17500 17499  0 Apr03 pts/2    00:00:00 -bash
+hzhao    19421  1336  0 Mar21 ?        00:00:01 /usr/libexec/gconfd-2
+hzhao    23374  1336  0 Apr04 ?        00:00:00 /usr/libexec/gvfsd-network --spawner :1.5 /org/gtk/gvfs/exec_spaw/1
+hzhao    23389  1336  0 Apr04 ?        00:00:00 /usr/libexec/gvfsd-dnssd --spawner :1.5 /org/gtk/gvfs/exec_spaw/3
+hzhao    31869  1336  0 Mar22 ?        00:00:00 /usr/libexec/gvfsd-metadata

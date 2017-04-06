@@ -4,6 +4,13 @@ import java.io.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+/**
+* LogParser opens the input file and parses this file 
+* line by line using regex to get a string array for 
+* constructing a LogEntry object.
+* @author Yunduan Han 
+*/
+
 public class LogParser {
 
     private BufferedReader bufferedReader;
@@ -13,10 +20,17 @@ public class LogParser {
         this.bufferedReader = new BufferedReader(new FileReader(new File(path)));
     }
 
+    /**
+     * Close the opened file.
+     */
     public void close() throws IOException {
         this.bufferedReader.close();
     }
 
+    /**
+     * Read one line and use regex to get matched 
+     * string arrays.
+     */
     public LogEntry nextEntry() throws IOException {
         String line = this.bufferedReader.readLine();
         if (line != null) {
@@ -36,6 +50,9 @@ public class LogParser {
         return null;
     }
 
+    /**
+     * Parsed a given string to get a LogEntry object
+     */
     public static LogEntry parseLogEntry(String s) {
         String line = s;
         if (line != null) {
@@ -54,6 +71,9 @@ public class LogParser {
         return null;
     }
 
+    /**
+     * Build a regex pattern for the specific input
+     */
     private static void buildRegexPattern() {
         String reClientAddress = "(\\S+)";
         String reDoubleDash = "-\\s+-";

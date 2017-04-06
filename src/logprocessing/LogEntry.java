@@ -4,6 +4,14 @@ import java.util.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+/**
+* The LogEntry class parse a string array to 
+* specified objects and used for processing 
+* and analysing.
+*
+* @author Yunduan Han 
+*/
+
 public class LogEntry {
 
     private ClientAddress address;
@@ -13,20 +21,16 @@ public class LogEntry {
     private HttpReply reply;
     private String entryString;
 
+    /**
+     * Parse the String array and get following:
+     * ClientAddress object represents client address
+     * Date object represents the access date
+     * HttpRequest object represents the http request 
+     * HttpReply object represents the http reply
+     */
     public LogEntry(String[] info, String entryString) {
 
         this.entryString = entryString;
-
-        /*ClientAddress result = null;
-
-        try { 
-            result = new ClientIPv4Address(info[0]); 
-        }
-        catch (IllegalArgumentException e) {}
-        if (result == null) {
-            result = new ClientDomainNameAddress(info[0]); 
-        }
-        this.address = result;*/
 
         if (info[0].matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
             try {

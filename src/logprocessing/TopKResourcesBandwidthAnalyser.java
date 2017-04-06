@@ -3,6 +3,13 @@ import tools.*;
 import java.util.*;
 import java.io.*;
 
+/**
+* TopKResourcesBandwidthAnalyser implements
+* the function to analyze the top k (10) 
+* resources that have the most bandwidth.
+*
+* @author Yunduan Han 
+*/
 public class TopKResourcesBandwidthAnalyser implements Analyser {
 
     private int topK;
@@ -19,6 +26,7 @@ public class TopKResourcesBandwidthAnalyser implements Analyser {
         this.set = new HashSet<ResourceBandwidth>();
     }
 
+    @Override
     public void analyze(LogEntry entry) {
         HttpRequest httpRequest = entry.getHttpRequest();
         if (httpRequest == null) {
@@ -45,6 +53,7 @@ public class TopKResourcesBandwidthAnalyser implements Analyser {
         }
     }
 
+    @Override
     public void reportResults() throws IOException {
 
         ArrayList<String> results = new ArrayList<String>();
@@ -62,6 +71,11 @@ public class TopKResourcesBandwidthAnalyser implements Analyser {
     }
 }
 
+/**
+ * ResourceBandwidth is used to
+ * store the resource name and 
+ * total bandwidth information.
+ */
 class ResourceBandwidth implements Comparable<ResourceBandwidth> {
 
     private String resource;

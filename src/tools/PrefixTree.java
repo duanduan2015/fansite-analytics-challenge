@@ -1,6 +1,11 @@
 package tools;
 import java.util.*;
 
+/**
+ * PrefixTree implements a Prefix Tree used 
+ * to store layerd domain name and resource 
+ * name.
+ */
 public class PrefixTree <K extends Segmentisable, V> {
 
     private TreeNode root;
@@ -20,7 +25,6 @@ public class PrefixTree <K extends Segmentisable, V> {
                return false;
            }
        }
-       //return true;
        return this.get(key) != null;
     }
 
@@ -70,6 +74,10 @@ public class PrefixTree <K extends Segmentisable, V> {
         }
     }
 
+    /**
+     * TreeNode implements a TreeNode data structure
+     * for PrefixTree  
+     */
     class TreeNode {
 
         private HashMap<String, TreeNode> children;

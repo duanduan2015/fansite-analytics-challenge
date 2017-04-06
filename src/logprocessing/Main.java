@@ -2,6 +2,13 @@ package logprocessing;
 import tools.*;
 import java.io.*;
 import java.util.*;
+
+/**
+* Main runs all the analysers to analyse and report 
+* results
+* @author Yunduan Han 
+*/
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
