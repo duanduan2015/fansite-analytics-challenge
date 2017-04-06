@@ -3,12 +3,6 @@ import tools.*;
 import java.io.*;
 import java.util.*;
 
-/**
-* Main runs all the analysers to analyse and report 
-* results
-* @author Yunduan Han 
-*/
-
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -21,17 +15,24 @@ public class Main {
         myAnalysers.add(new TopKBusiestNMinutesAnalyser(10, 60, new File(args[3])));
         myAnalysers.add(new BlockNMinutesAnalyser(20, 5, 3, new File(args[4])));
 
-        LogEntry entry = parser.nextEntry();
-        int i = 0;
-        while (entry != null) {
+        LogEntry entry = null;
+        for (int i = 1;; i++) {
+            try {
+                entry = parser.nextEntry();
+            } catch (IllegalArgumentException e) {
+                //System.out.println("Warning: " + e.getMessage());
+            }
+
+            if (entry == null) {
+                break;
+            }
+
             for (Analyser a: myAnalysers) {
                 a.analyze(entry);
             }
-            i++;
             if (i % 10000 == 0) {
                 System.out.println("processed: " + i + " lines");
             }
-            entry = parser.nextEntry();
         }
 
         parser.close();
