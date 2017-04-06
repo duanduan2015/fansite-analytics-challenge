@@ -16,14 +16,15 @@ public class Main {
         LogEntry entry = parser.nextEntry();
         int i = 0;
         while (entry != null) {
-            if (i == 10000) {
-                System.out.println(i);
+            if (i % 10000 == 0) {
+                System.out.println("processed: " + i + " lines");
             }
             hostsAnalyser.analyze(entry);
             resourcesAnalyser.analyze(entry);
             busiestHoursAnalyser.analyze(entry); 
             blockAnalyser.analyze(entry);
             entry = parser.nextEntry();
+            i++;
         }
 
         parser.close();
@@ -32,6 +33,5 @@ public class Main {
         resourcesAnalyser.reportResults();
         busiestHoursAnalyser.reportResults();
         blockAnalyser.reportResults();
-        i++;
     }
 }
