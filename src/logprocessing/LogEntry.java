@@ -17,12 +17,28 @@ public class LogEntry {
 
         this.entryString = entryString;
 
+        /*ClientAddress result = null;
+
+        try { 
+            result = new ClientIPv4Address(info[0]); 
+        }
+        catch (IllegalArgumentException e) {}
+        if (result == null) {
+            result = new ClientDomainNameAddress(info[0]); 
+        }
+        this.address = result;*/
+
         if (info[0].matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
-            this.address = new ClientIPv4Address(info[0]);
+            try {
+                this.address = new ClientIPv4Address(info[0]);
+            } catch (IllegalArgumentException e) {
+                this.address = new ClientDomainNameAddress(info[0]);
+            }
         } else {
             this.address = new ClientDomainNameAddress(info[0]);
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
         try {
             this.date = sdf.parse(info[1]);
             this.dateString = info[1];
@@ -55,6 +71,12 @@ public class LogEntry {
     
     public String getEntryString() {
         return this.entryString;
+    }
+
+    public String toString() {
+        return String.format("log_entry(%s, time(%s), %s, %s)",
+                this.address, this.date,
+                this.request, this.reply);
     }
 
 }

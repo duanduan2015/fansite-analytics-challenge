@@ -32,6 +32,8 @@ public class HttpRequest {
     }
 
     public String toString() {
-        return this.requestString; 
+        //return this.requestString; 
+		return String.format("http_req(method:%s, path:%s)",
+				this.method, this.path == null ? "(none)" : this.path.toString());
     }
 }

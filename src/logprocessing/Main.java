@@ -14,8 +14,11 @@ public class Main {
         BlockNMinutesAnalyser blockAnalyser = new BlockNMinutesAnalyser(20, 5, 3, new File(args[4]));
 
         LogEntry entry = parser.nextEntry();
-
+        int i = 0;
         while (entry != null) {
+            if (i == 10000) {
+                System.out.println(i);
+            }
             hostsAnalyser.analyze(entry);
             resourcesAnalyser.analyze(entry);
             busiestHoursAnalyser.analyze(entry); 

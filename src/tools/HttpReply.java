@@ -23,6 +23,6 @@ public class HttpReply {
     }
 
     public String toString() {
-        return "Status code: " + Integer.toString(this.status)  + "," + " number of bytes: " + Long.toString(numOfBytes);
+        return String.format("http_resp(code:%d, length:%d)", this.status, this.numOfBytes);
     }
 }

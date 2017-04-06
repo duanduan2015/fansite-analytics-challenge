@@ -36,6 +36,24 @@ public class LogParser {
         return null;
     }
 
+    public static LogEntry parseLogEntry(String s) {
+        String line = s;
+        if (line != null) {
+            Matcher m = REGEX_PATTERN.matcher(line);
+            int count = m.groupCount();
+            String[] info = new String[count];
+            if (m.find()) {
+                for (int i = 0; i < count; i++) {
+                    info[i] = m.group(i + 1);
+                }
+            } else {
+                throw new IllegalArgumentException("Unable to parse line '" + line + "'");
+            }
+            return new LogEntry(info, line);
+        }
+        return null;
+    }
+
     private static void buildRegexPattern() {
         String reClientAddress = "(\\S+)";
         String reDoubleDash = "-\\s+-";
