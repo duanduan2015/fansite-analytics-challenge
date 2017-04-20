@@ -3,8 +3,8 @@ import tools.*;
 import java.io.*;
 
 /**
-* The Analyser interface used for four specific analyser
-* int this project, each analyser generates one feature.
+* The Analyser interface used for four specific analysers
+* int this project, each analyser compute one feature's result.
 *
 * @author Yunduan Han 
 */

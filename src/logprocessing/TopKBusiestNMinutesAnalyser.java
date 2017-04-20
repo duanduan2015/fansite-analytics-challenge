@@ -10,6 +10,7 @@ import java.io.*;
 *
 * @author Yunduan Han 
 */
+
 public class TopKBusiestNMinutesAnalyser implements Analyser {
 
     private AccessList accessList;
@@ -26,13 +27,13 @@ public class TopKBusiestNMinutesAnalyser implements Analyser {
         long timestamp = entry.getAccessDate().getTime();
         String dateString = entry.getDateString();
 
-        accessList.add(timestamp, dateString);
+        this.accessList.add(timestamp, dateString);
     }
 
     @Override
     public void reportResults() throws IOException {
 
-        accessList.forceFillRank();
+        this.accessList.forceFillRank();
 
         for (AccessList.BusyPeriod bp: this.accessList.toList()) {
             this.writer.write(String.format("%s,%d%n", bp.getStartString(),
@@ -43,6 +44,13 @@ public class TopKBusiestNMinutesAnalyser implements Analyser {
     }
 }
 
+/**
+ * This class maintains a list(this.accessList) 
+ * of different timestamp and its access time within 
+ * 60 minutes, and a top 10 busiest rank of timestamps
+ * (this.accessRank)
+ */
+
 class AccessList {
 
     private final long PERIOD_LIMIT;
@@ -51,6 +59,10 @@ class AccessList {
     private LinkedList<Access> accessList;
     private PriorityQueue<Access> accessRank;
 
+    /**
+     * This is used to pack the required print info
+     * to the output file
+     */
     static public class BusyPeriod {
         private String start;
         private int nAccess;
@@ -69,6 +81,10 @@ class AccessList {
         }
     }
 
+    /**
+     * This class is used to gather the info of a 
+     * timestamp as a entry in the list and rank queue.
+     */
     static private class Access implements Comparable<Access>{
         long timestamp;
         int count;
@@ -79,11 +95,13 @@ class AccessList {
             this.count = initCount;
             this.dateString = dateString;
         }
-
+        
+        @Override
         public int compareTo(Access other) {
             return this.count > other.count ? 1 :
                 this.count < other.count ? -1 : 0;
         }
+
     }
 
     public AccessList(int size, long period) {
@@ -95,38 +113,38 @@ class AccessList {
     }
 
     public long getOldest() {
-        return accessList.getFirst().timestamp;
+        return this.accessList.getFirst().timestamp;
     }
 
     public void add(long ts, String raw) {
 
-        while (accessList.size() > 0 && ts - accessList.getFirst().timestamp >= this.PERIOD_LIMIT) {
-            Access evicted = accessList.pollFirst();
+        while (this.accessList.size() > 0 && ts - this.accessList.getFirst().timestamp >= this.PERIOD_LIMIT) {
+            Access evicted = this.accessList.pollFirst();
             this.count -= evicted.count;
             evicted.count += this.count;
 
-            accessRank.offer(evicted);
-            if (accessRank.size() > RANKING_LIMIT) {
-                accessRank.poll();
+            this.accessRank.offer(evicted);
+            if (this.accessRank.size() > RANKING_LIMIT) {
+                this.accessRank.poll();
             }
         }
 
-        if (accessList.size() == 0 || accessList.getLast().timestamp != ts) {
-            accessList.addLast(new Access(ts, 1, raw));
+        if (this.accessList.size() == 0 || this.accessList.getLast().timestamp != ts) {
+            this.accessList.addLast(new Access(ts, 1, raw));
         } else {
-            accessList.getLast().count += 1;
+            this.accessList.getLast().count += 1;
         }
         this.count += 1;
     }
 
     public int size() {
-        return count;
+        return this.count;
     }
 
     public List<BusyPeriod> toList() {
         LinkedList<BusyPeriod> result = new LinkedList<BusyPeriod>();
-        while (accessRank.size() > 0) {
-            Access access = accessRank.poll();
+        while (this.accessRank.size() > 0) {
+            Access access = this.accessRank.poll();
             result.addFirst(new BusyPeriod(access.dateString, access.count));
         }
         return Collections.unmodifiableList(result);
@@ -134,14 +152,13 @@ class AccessList {
 
     public void forceFillRank() {
 
-        int accessLeft = count;
-        for (Access oldItem: accessList) {
-            accessRank.offer(new Access(oldItem.timestamp, accessLeft, oldItem.dateString));
-            if (accessRank.size() > RANKING_LIMIT) {
-                accessRank.poll();
+        int accessLeft = this.count;
+        for (Access oldItem: this.accessList) {
+            this.accessRank.offer(new Access(oldItem.timestamp, accessLeft, oldItem.dateString));
+            if (this.accessRank.size() > RANKING_LIMIT) {
+                this.accessRank.poll();
             }
             accessLeft -= oldItem.count;
         }
     }
 }
-

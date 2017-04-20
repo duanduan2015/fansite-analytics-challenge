@@ -9,8 +9,8 @@ JAVAC=javac
 JAVA=java
 
 JAVA_SRC="$(find $PROJ_HOME/src/ -name '*.java')"
-JUNIT_JAR="/usr/share/java/junit.jar"
-HAMCREST_JAR="/usr/share/java/hamcrest/core.jar"
+JUNIT_JAR="$HOME/Downloads/junit-4.12.jar"
+HAMCREST_JAR="$HOME/Downloads/hamcrest-core-1.3.jar"
 JUNIT_CLASS="org.junit.runner.JUnitCore"
 JAVA_TEST_CLASS="test.UnitTest"
 
